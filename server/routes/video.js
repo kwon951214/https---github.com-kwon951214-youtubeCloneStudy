@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-//const { Video } = require("../models/User"); //모델 만들고 가져오는거
+const { Video } = require("../models/Video"); //모델 만들고 가져오는거
 
 const { auth } = require("../middleware/auth");
 const multer = require("multer");
@@ -31,7 +31,7 @@ const upload = multer({ storage: storage }).single("file");
 
 router.post('/uploadfiles', (req, res) => {
     //req를 통해서 파일을 받음
-
+    console.log(2)
     //비디오를 서버에 저장한다
     upload(req, res, err => {
         if (err) {
@@ -42,14 +42,23 @@ router.post('/uploadfiles', (req, res) => {
 
 })
 
+router.post('/uploadVideo', (req, res) => {
+    //비디오 정보들을 저장한다.
+    const video = new Video(req.body) //client에서 보낸 value가 req.body안에 담겨있음
+    video.save((err, doc) => {
+        if (err) return res.json({ success: false, err })
+        res.status(200).json({ success: true })
+    })
+})
+
 router.post("/thumbnail", (req, res) => {
 
-    let filePath ="";
-    let fileDuration ="";
+    let filePath = "";
+    let fileDuration = "";
     //썸네일 생성하고 비디오 러닝타임도 가져오기
 
     //비디오 정보 가져오기
-    ffmpeg.ffprobe(req.body.url, function(err, metadata){
+    ffmpeg.ffprobe(req.body.url, function (err, metadata) {
         console.dir(metadata);
         console.log(metadata.format.duration);
 
@@ -66,19 +75,19 @@ router.post("/thumbnail", (req, res) => {
         })
         .on('end', function () {
             console.log('Screenshots taken');
-            return res.json({ success: true, url: filePath, fileDuration: fileDuration})
+            return res.json({ success: true, url: filePath, fileDuration: fileDuration })
         })
         .on('error', function (err) {
             console.log(err);
             return res.json({ success: false, err });
         })
         .screenshots({
-            
+
             count: 3, //썸네일 세개
             folder: 'uploads/thumbnails',
-            size:'320x240',
-            
-            filename:'thumbnail-%b.png'
+            size: '320x240',
+
+            filename: 'thumbnail-%b.png'
         });
 
 });
