@@ -46,3 +46,9 @@ useState() = 괄호 안에 있는 값이 state 초기 값. 숫자나 문자 타�
 * axios = ajax처럼 request를 서버에 보내고 받고 하는 거
 * /server의 index.js에서 라우트를 먼저 읽고 옴
 npm install multer --save <= 서버에 파일을 저장하기 위해 dependency 다운 받는거
+
+# 7강
+* RDBMS <=> Mongo DB
+  tables - collections
+  rows   - documents
+  columns - fields
