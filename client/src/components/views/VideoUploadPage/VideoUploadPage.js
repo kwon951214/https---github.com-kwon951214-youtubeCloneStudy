@@ -18,7 +18,7 @@ const CategoryOptions = [
     { value: 3, label: "Pets & Animals" }
 ]
 function VideoUploadPage(props) {
-    const user = useSelector(state => state.user)
+    const user = useSelector(state => state.user) //redux에서 state에 user정보를 가져옴
     const [VideoTitle, setVideoTitle] = useState("")
     const [Description, setDescription] = useState("")
     const [Private, setPrivate] = useState(0)
@@ -83,6 +83,7 @@ function VideoUploadPage(props) {
     const onSubmit = (e) => {
         e.preventDefault();
 
+        //Video.js의 스키마에 다 넣어야 해서 저렇게 보내줌
        const variables = {
            writer: user.userData._id,
            title: VideoTitle,
@@ -94,11 +95,11 @@ function VideoUploadPage(props) {
            thunbnails: ThumbnailPath
        }
 
-       Axios.post('/api/video/uploadVideo', variables)
-       .then(response => {
+       Axios.post('/api/video/uploadVideo', variables)//보내는거
+       .then(response => {//받는거
            if(response.data.success){
                console.log(response.data)
-               console.log(1)
+               
                message.success('업로드 성공!')
                 setTimeout(() => {
                     props.history.push('/')
