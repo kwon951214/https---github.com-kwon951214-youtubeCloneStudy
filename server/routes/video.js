@@ -45,7 +45,7 @@ router.post('/uploadfiles', (req, res) => {
 router.post('/uploadVideo', (req, res) => {
     //비디오 정보들을 저장한다.
     const video = new Video(req.body) //client에서 보낸 value가 req.body안에 담겨있음
-    video.save((err, doc) => {
+    video.save((err, doc) => { //video.save() ->저장하는 거 *몽고디비 메소드:
         if (err) return res.json({ success: false, err })
         res.status(200).json({ success: true })
     })
