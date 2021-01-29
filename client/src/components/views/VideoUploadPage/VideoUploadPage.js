@@ -46,7 +46,7 @@ function VideoUploadPage(props) {
 
     const onDrop = (files) => {
 
-        let formData = new FormData;
+        let formData = new FormData();
         const config = {
             header: { 'content-type': 'multipart/form-data' }
         }
@@ -101,9 +101,9 @@ function VideoUploadPage(props) {
                console.log(response.data)
                
                message.success('업로드 성공!')
-                setTimeout(() => {
+                //setTimeout(() => {
                     props.history.push('/')
-                },3000);
+               // },3000);
             
            }else{
                alert('비디오 업로드 실패')

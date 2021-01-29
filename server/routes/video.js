@@ -45,11 +45,24 @@ router.post('/uploadfiles', (req, res) => {
 router.post('/uploadVideo', (req, res) => {
     //비디오 정보들을 저장한다.
     const video = new Video(req.body) //client에서 보낸 value가 req.body안에 담겨있음
+    //console찍기
     video.save((err, doc) => { //video.save() ->저장하는 거 *몽고디비 메소드:
         if (err) return res.json({ success: false, err })
         res.status(200).json({ success: true })
     })
 })
+
+router.post('/getVideos', (req, res) => {
+    //비디오를 DB에서 가져와 클라이언트에 보낸다
+
+    Video.find() //find() :비디오 콜렉션 안에 있는 모든걸 가져옴
+    .populate('writer') //populate 안하면 id밖에 못가져옴
+    .exec((err, videos)=> {
+        if(err) return res.status(400).send(err)
+        res.status(200).json({ success: true, videos})
+    })
+})
+
 
 router.post("/thumbnail", (req, res) => {
 

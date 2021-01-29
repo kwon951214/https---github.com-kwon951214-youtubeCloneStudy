@@ -52,3 +52,10 @@ npm install multer --save <= 서버에 파일을 저장하기 위해 dependency 
   tables - collections
   rows   - documents
   columns - fields
+
+  # 8강
+
+* lg - 가장 클 때
+  md - 중간
+  xs - 가장 작을 때
+  화면은 24사이즈가 전체 사이즈!
