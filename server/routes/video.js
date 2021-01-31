@@ -40,7 +40,7 @@ router.post('/uploadfiles', (req, res) => {
         return res.json({ success: true, url: res.req.file.path, fileName: res.req.file.filename })
     })
 
-})
+});
 
 router.post('/uploadVideo', (req, res) => {
     //비디오 정보들을 저장한다.
@@ -50,19 +50,27 @@ router.post('/uploadVideo', (req, res) => {
         if (err) return res.json({ success: false, err })
         res.status(200).json({ success: true })
     })
-})
+});
 
-router.post('/getVideos', (req, res) => {
+router.get("/getVideos", (req, res) => {
     //비디오를 DB에서 가져와 클라이언트에 보낸다
-
     Video.find() //find() :비디오 콜렉션 안에 있는 모든걸 가져옴
-    .populate('writer') //populate 안하면 id밖에 못가져옴
-    .exec((err, videos)=> {
-        if(err) return res.status(400).send(err)
-        res.status(200).json({ success: true, videos})
-    })
-})
+        .populate('writer') //populate 안하면 id밖에 못가져옴
+        .exec((err, videos) => {
+            if (err) return res.status(400).send(err);
+            res.status(200).json({ success: true, videos })
+        })
+});
 
+router.post("/getVideoDetail", (req, res) => {
+
+    Video.findOne({ "_id": req.body.videoId })
+        .populate('writer')
+        .exec((err,videoDetail)=>{
+            if(err) return res.status(400).send(err)
+            return res.status(200).json({ success: true, videoDetail})
+        })
+});
 
 router.post("/thumbnail", (req, res) => {
 
