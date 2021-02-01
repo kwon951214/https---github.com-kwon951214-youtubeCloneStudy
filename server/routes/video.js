@@ -45,6 +45,8 @@ router.post('/uploadfiles', (req, res) => {
 router.post('/uploadVideo', (req, res) => {
     //비디오 정보들을 저장한다.
     const video = new Video(req.body) //client에서 보낸 value가 req.body안에 담겨있음
+    console.log(video);
+    console.log("video");
     //console찍기
     video.save((err, doc) => { //video.save() ->저장하는 거 *몽고디비 메소드:
         if (err) return res.json({ success: false, err })
@@ -63,13 +65,14 @@ router.get("/getVideos", (req, res) => {
 });
 
 router.post("/getVideoDetail", (req, res) => {
-
+    console.log(res)
     Video.findOne({ "_id": req.body.videoId })
         .populate('writer')
         .exec((err,videoDetail)=>{
             if(err) return res.status(400).send(err)
             return res.status(200).json({ success: true, videoDetail})
         })
+    
 });
 
 router.post("/thumbnail", (req, res) => {
@@ -82,7 +85,6 @@ router.post("/thumbnail", (req, res) => {
     ffmpeg.ffprobe(req.body.url, function (err, metadata) {
         console.dir(metadata);
         console.log(metadata.format.duration);
-
         fileDuration = metadata.format.duration;
     })
 
@@ -96,7 +98,7 @@ router.post("/thumbnail", (req, res) => {
         })
         .on('end', function () {
             console.log('Screenshots taken');
-            return res.json({ success: true, url: filePath, fileDuration: fileDuration })
+            return res.json({ success: true, url: filePath, fileDuration: fileDuration });
         })
         .on('error', function (err) {
             console.log(err);
@@ -104,7 +106,7 @@ router.post("/thumbnail", (req, res) => {
         })
         .screenshots({
 
-            count: 3, //썸네일 세개
+            count: 1, //썸네일 세개
             folder: 'uploads/thumbnails',
             size: '320x240',
 

@@ -18,7 +18,7 @@ const CategoryOptions = [
     { value: 3, label: "Pets & Animals" }
 ]
 function VideoUploadPage(props) {
-    const user = useSelector(state => state.user) //redux에서 state에 user정보를 가져옴
+    const user = useSelector(state => state.user); //redux에서 state에 user정보를 가져옴
     const [VideoTitle, setVideoTitle] = useState("")
     const [Description, setDescription] = useState("")
     const [Private, setPrivate] = useState(0)
@@ -66,7 +66,7 @@ function VideoUploadPage(props) {
                     Axios.post('/api/video/thumbnail', variable)
                         .then(response => {
                             if (response.data.success) {
-                                //console.log(response.data);
+                                console.log(response.data);
                                 setDuration(response.data.fileDuration)
                                 setThumbnailPath(response.data.url)
                             } else {
@@ -92,9 +92,10 @@ function VideoUploadPage(props) {
            filePath : FilePath,
            Category: Category,
            duration : Duration,
-           thunbnails: ThumbnailPath
+           thumbnail: ThumbnailPath
        }
-
+    console.log(variables);
+    console.log('here!');
        Axios.post('/api/video/uploadVideo', variables)//보내는거
        .then(response => {//받는거
            if(response.data.success){

@@ -28,14 +28,14 @@ function LandingPage() {
     //         즉, 위에서 Video 로 전달받은 배열을 map 메소드를 이용하여 video라는 값에 넣어 새로운 배열로 만든 후, 렌더링
     //        (반복되는 컴포넌트를 랜더링 할 수 있다)
     const renderCards = Video.map((video, index) => {
-        
+
         var minutes = Math.floor(video.duration / 60);
         var seconds = Math.floor((video.duration - minutes * 60));
 
         return <Col lg={6} md={8} xs={24} key={video._id}>
 
-            
-                <a href={`/video/post/${video._id}`}>
+
+            <a href={`/video/${video._id}`}>
                 <div style={{ position: 'relative' }}>
                     <img style={{ width: '100%' }} src={`http://localhost:5000/${video.thumbnail}`} alt="">
 
@@ -43,8 +43,8 @@ function LandingPage() {
                     <div className="duration">
                         <span>{minutes}:{seconds}</span>
                     </div>
-                    </div>
-                </a>
+                </div>
+            </a>
             <br />
             <Meta avatar={
                 <Avatar src={video.writer.image} />
@@ -60,7 +60,7 @@ function LandingPage() {
     return (
         <div style={{ width: '85%', margin: '3rem auto' }}>
             <Title level={2}>Recommended</Title>
-            <hr/>
+            <hr />
             <Row gutter={[32, 16]}>
                 {renderCards}
             </Row>
