@@ -8,11 +8,11 @@ function VideoDetailPage(props) {
     const variable = { videoId: videoId }
     const [VideoDetail, setVideoDetail] = useState([])
     useEffect(() => {
-        Axios.post('/api/video/getVideoDetail')
+        Axios.post('/api/video/getVideoDetail',variable)
             .then(response => {
                 if (response.data.success) {
                     console.log(response.data);
-                    setVideoDetail(response.data.VideoDetail)
+                    setVideoDetail(response.data.videoDetail)
                 
                 } else {
                     alert('비디오 정보를 가져오길 실패했습니다.')
@@ -21,7 +21,7 @@ function VideoDetailPage(props) {
             })
 
     },[])
-    console.log(VideoDetail);
+    
     
     if (VideoDetail.writer) {
         return (
