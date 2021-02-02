@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { Row, Avatar, Col, List } from 'antd';
 import Axios from 'axios';
 import SideVideo from './Sections/SideVideo';
+import Subscribe from './Sections/Subscribe';
 function VideoDetailPage(props) {
 
     const videoId = props.match.params.videoId
     const variable = { videoId: videoId }
     const [VideoDetail, setVideoDetail] = useState([])
+
     useEffect(() => {
         Axios.post('/api/video/getVideoDetail',variable)
             .then(response => {
+                console.log(variable)
+                console.log("variable")
                 if (response.data.success) {
                     console.log(response.data);
                     setVideoDetail(response.data.videoDetail)
@@ -35,7 +39,7 @@ function VideoDetailPage(props) {
 
 
                         <List.Item
-                            actions
+                            actions={[<Subscribe userTo={VideoDetail.writer._id}/>]}
                         >
                             <List.Item.Meta
                                 avatar={<Avatar src={VideoDetail.writer.image} />}
