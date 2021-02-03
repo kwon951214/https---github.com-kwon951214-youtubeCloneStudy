@@ -12,10 +12,8 @@ function VideoDetailPage(props) {
     useEffect(() => {
         Axios.post('/api/video/getVideoDetail',variable)
             .then(response => {
-                console.log(variable)
-                console.log("variable")
                 if (response.data.success) {
-                    console.log(response.data);
+                
                     setVideoDetail(response.data.videoDetail)
                 
                 } else {
@@ -39,7 +37,7 @@ function VideoDetailPage(props) {
 
 
                         <List.Item
-                            actions={[<Subscribe userTo={VideoDetail.writer._id}/>]}
+                            actions={[<Subscribe userTo={VideoDetail.writer._id} userFrom={localStorage.getItem('userId')}/>]}
                         >
                             <List.Item.Meta
                                 avatar={<Avatar src={VideoDetail.writer.image} />}
