@@ -40,7 +40,6 @@ router.post('/subscribe', (req, res) => {
     const subscribe = new Subscriber(req.body)
     
     subscribe.save((err, doc) => {
-        console.log(subscribe)
         if (err) return res.json({ success: false, err })
         res.status(200).json({ success: true })
     })
