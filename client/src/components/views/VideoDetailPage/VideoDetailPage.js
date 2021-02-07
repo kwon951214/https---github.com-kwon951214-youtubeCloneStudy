@@ -51,7 +51,7 @@ function VideoDetailPage(props) {
                         </List.Item>
 
                         {/* conntents */}
-                        <Comment />
+                        <Comment postId = {videoId} />
                     </div>
                 </Col>
                 <Col lg={6} xs={24}>
