@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Axios from 'axios'
 import { Comment, Avatar, Button, Input } from 'antd';
 import { useSelector } from 'react-redux';
+
 function SingleComment(props) {
     const user = useSelector(state => state.user);
     const [OpenReply, setOpenReply] = useState(false)
@@ -10,7 +11,7 @@ function SingleComment(props) {
         setOpenReply(!OpenReply)
     }
     const onHandleChanege = (event) => {
-        setCommentValue(event.currentTarget.CommentValue)
+        setCommentValue(event.currentTarget.value)
     }
 
     const onSubmit = (event) => {
@@ -28,6 +29,7 @@ function SingleComment(props) {
                 if (response.data.success) {
                    console.log(response.data.result)
                    setCommentValue("")
+                   setOpenReply(false)
                    props.refreshFunction(response.data.result)
                 } else {
                     alert('코멘트를 저장하지 못했습니다')
