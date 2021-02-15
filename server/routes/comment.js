@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { Comment } = require("../models/Comment")
+const { Comment } = require("../models/Comment");
 //=================================
 //             Comment
 //=================================
@@ -13,10 +13,8 @@ router.post('/saveComment', (req, res) => {
         if(err) return res.json({ success: false, err})
 
         Comment.find({'_id': comment._id})
-        .pooulate('writer')
-        .exec( (err, result)=> {
-            console.log(result)
-            console.log("#############");
+        .populate('writer')
+        .exec((err, result)=> {
             if(err) return res.json({ success: false, err})
             res.status(200).json({ success: true, result})
         })
@@ -24,6 +22,7 @@ router.post('/saveComment', (req, res) => {
 });
 
 router.post('/getComments', (req, res) => {
+
     Comment.find({"postId": req.body.videoId})
     .populate('writer')
     .exec((err, comments)=>{

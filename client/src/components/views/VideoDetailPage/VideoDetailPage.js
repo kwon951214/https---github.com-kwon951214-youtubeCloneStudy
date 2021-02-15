@@ -22,12 +22,13 @@ function VideoDetailPage(props) {
                 }
 
             })
-
+            console.log(variable)
+            console.log("variable")
         Axios.post('/api/comment/getComments', variable)
             .then(response => {
                 if (response.data.success) {
                     setComments(response.data.comments)
-                    console.log(response.data.comments)
+                    console.log(response.data)
                 } else {
                     alert('코멘트 정보를 가져오는 것을 실패 하였습니다.')
                 }

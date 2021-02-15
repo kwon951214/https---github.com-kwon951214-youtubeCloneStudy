@@ -13,7 +13,6 @@ function Comment(props) {
     }
 
     const onSubmit = (event) => {
-        console.log(1);
         event.preventDefault();
 
         const variables = {
@@ -24,6 +23,7 @@ function Comment(props) {
 
         Axios.post('/api/comment/saveComment', variables)
             .then(response => {
+            
                 if (response.data.success) {
                     console.log(response.data.result)
                     setcommentValue("")
@@ -54,7 +54,7 @@ function Comment(props) {
             ))}
 
             {/* Root Comment Form */}
-            <form style={{ display: 'flex' }} onSubmit={onsubmit}>
+            <form style={{ display: 'flex' }} onSubmit={onSubmit}>
                 <textarea
                     style={{ width: '100%', borderRadius: '5px' }}
                     onChange={handleClick}
@@ -62,7 +62,7 @@ function Comment(props) {
                     placeholder="코멘트를 작성해 주세요"
                 />
                 <br />
-                <button style={{ width: '20%', height: '52px' }} onClick={onsubmit}> Submit</button>
+                <button style={{ width: '20%', height: '52px' }} onClick={onSubmit}> Submit</button>
             </form>
         </div>
     )
