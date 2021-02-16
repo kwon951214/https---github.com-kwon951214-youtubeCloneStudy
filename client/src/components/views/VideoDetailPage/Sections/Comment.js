@@ -20,7 +20,8 @@ function Comment(props) {
             writer: user.userData._id,
             postId: videoId
         }
-
+        console.log(variables)
+        console.log("variables")
         Axios.post('/api/comment/saveComment', variables)
             .then(response => {
             

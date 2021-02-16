@@ -94,8 +94,6 @@ function VideoUploadPage(props) {
            duration : Duration,
            thumbnail: ThumbnailPath
        }
-    console.log(variables);
-    console.log('here!');
        Axios.post('/api/video/uploadVideo', variables)//보내는거
        .then(response => {//받는거
            if(response.data.success){

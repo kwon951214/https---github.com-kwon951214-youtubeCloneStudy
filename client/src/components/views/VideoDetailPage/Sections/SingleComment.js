@@ -16,7 +16,7 @@ function SingleComment(props) {
 
     const onSubmit = (event) => {
         event.preventDefault();
-
+        console.log(props)
         const variables = {
             content: CommentValue,
             writer: user.userData._id,
@@ -43,19 +43,10 @@ function SingleComment(props) {
         <div>
             <Comment
                 actions={actions}
-                author={props.comment.writer.name}
-                avatar={
-                    <Avatar
-                        src={props.comment.writer.image}
-                        alt="image"
-                    />
-                }
-                content={
-                    <p>
-                        {props.comment.content}
-                    </p>
-                }
-            ></Comment>
+                author={props.comment && props.comment.writer ? props.comment.writer.name : ''}
+                avatar={<Avatar arc={props.comment && props.comment.image ? props.comment.writer.image : ''} alt />}
+                content={<p>{props.comment ? props.comment.content : ''}</p>}
+            />
             {OpenReply &&
                 <form style={{ display: 'flex' }} onSubmit={onSubmit}>
                     <textarea

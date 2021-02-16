@@ -22,8 +22,7 @@ function VideoDetailPage(props) {
                 }
 
             })
-            console.log(variable)
-            console.log("variable")
+            
         Axios.post('/api/comment/getComments', variable)
             .then(response => {
                 if (response.data.success) {
